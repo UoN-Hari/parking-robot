@@ -1,0 +1,23 @@
+diff_H80:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  # Position Controllers --------------------------------------
+  diff_left_front_position_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: diff_left_front
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  diff_left_rear_position_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: diff_left_rear
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  diff_right_rear_position_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: diff_right_rear
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  diff_right_front_position_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: diff_right_front
+    pid: {p: 100.0, i: 0.01, d: 10.0}

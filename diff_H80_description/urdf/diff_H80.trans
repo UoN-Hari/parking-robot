@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<robot name="diff_H80" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<transmission name="diff_left_front_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="diff_left_front">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="diff_left_front_actr">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="diff_left_rear_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="diff_left_rear">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="diff_left_rear_actr">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="diff_right_rear_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="diff_right_rear">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="diff_right_rear_actr">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="diff_right_front_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="diff_right_front">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="diff_right_front_actr">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+</robot>

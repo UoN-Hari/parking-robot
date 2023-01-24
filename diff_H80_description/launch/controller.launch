@@ -1,0 +1,9 @@
+<launch>
+
+<rosparam file="$(find diff_H80_description)/config/controller.yaml" command="load"/>
+<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="diff_H80" args="diff_left_front_position_controller diff_left_rear_position_controller diff_right_rear_position_controller diff_right_front_position_controller joint_state_controller "/>
+<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+  <remap from="/joint_states" to="/diff_H80/joint_states"/>
+</node>
+
+</launch>
