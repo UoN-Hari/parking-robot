@@ -1,9 +1,130 @@
 <launch>
 
 <rosparam file="$(find diff_H80_description)/config/controller.yaml" command="load"/>
-<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="diff_H80" args="diff_left_front_position_controller diff_left_rear_position_controller diff_right_rear_position_controller diff_right_front_position_controller joint_state_controller "/>
+
+<node name="controller_spawner" ns="/diff_H80" output="screen" pkg="controller_manager" respawn="false" type="spawner" 
+      args="diff_left_front_position_controller diff_left_rear_position_controller 
+            diff_right_rear_position_controller diff_right_front_position_controller 
+            joint_state_controller "/>
+
+
 <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
   <remap from="/joint_states" to="/diff_H80/joint_states"/>
 </node>
 
+<!-- <arg name="rvizconfig" default="$(find diff_H80_description)/config/urdf.rviz"/>
+<node name="rviz" pkg="rviz" args="-d $(arg rvizconfig)" type="rviz" required="true"/> -->
+
 </launch>
+<!-- 
+roslaunch infantry_description controller.launch 
+WARNING: Package name "diff_H80_description" does not follow the naming conventions. It should start with a lower case letter and only contain lower case letters, digits, underscores, and dashes.
+... logging to /home/bssn/.ros/log/f7817d2e-ab36-11ed-b187-d71184b41f85/roslaunch-bssn-laptop-14621.log
+Checking log directory for disk usage. This may take a while.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+
+WARNING: Package name "diff_H80_description" does not follow the naming conventions. It should start with a lower case letter and only contain lower case letters, digits, underscores, and dashes.
+started roslaunch server http://bssn-laptop:34567/
+
+SUMMARY
+========
+
+PARAMETERS
+ * /infantry/Rev27_position_controller/joint: Rev27
+ * /infantry/Rev27_position_controller/pid/d: 0.01
+ * /infantry/Rev27_position_controller/pid/i: 0.01
+ * /infantry/Rev27_position_controller/pid/p: 1.0
+ * /infantry/Rev27_position_controller/type: effort_controller...
+ * /infantry/Rev28_position_controller/joint: Rev28
+ * /infantry/Rev28_position_controller/pid/d: 1
+ * /infantry/Rev28_position_controller/pid/i: 1
+ * /infantry/Rev28_position_controller/pid/p: 10.0
+ * /infantry/Rev28_position_controller/type: velocity_controll...
+ * /infantry/Rev29_position_controller/joint: Rev29
+ * /infantry/Rev29_position_controller/pid/d: 0.01
+ * /infantry/Rev29_position_controller/pid/i: 0.01
+ * /infantry/Rev29_position_controller/pid/p: 1.0
+ * /infantry/Rev29_position_controller/type: effort_controller...
+ * /infantry/Rev30_position_controller/joint: Rev30
+ * /infantry/Rev30_position_controller/pid/d: 1
+ * /infantry/Rev30_position_controller/pid/i: 1
+ * /infantry/Rev30_position_controller/pid/p: 10.0
+ * /infantry/Rev30_position_controller/type: velocity_controll...
+ * /infantry/Rev31_position_controller/joint: Rev31
+ * /infantry/Rev31_position_controller/pid/d: 0.01
+ * /infantry/Rev31_position_controller/pid/i: 0.01
+ * /infantry/Rev31_position_controller/pid/p: 1.0
+ * /infantry/Rev31_position_controller/type: effort_controller...
+ * /infantry/Rev32_position_controller/joint: Rev32
+ * /infantry/Rev32_position_controller/pid/d: 1
+ * /infantry/Rev32_position_controller/pid/i: 1
+ * /infantry/Rev32_position_controller/pid/p: 10.0
+ * /infantry/Rev32_position_controller/type: velocity_controll...
+ * /infantry/Rev33_position_controller/joint: Rev33
+ * /infantry/Rev33_position_controller/pid/d: 0.01
+ * /infantry/Rev33_position_controller/pid/i: 0.01
+ * /infantry/Rev33_position_controller/pid/p: 1.0
+ * /infantry/Rev33_position_controller/type: effort_controller...
+ * /infantry/Rev34_position_controller/joint: Rev34
+ * /infantry/Rev34_position_controller/pid/d: 1
+ * /infantry/Rev34_position_controller/pid/i: 1
+ * /infantry/Rev34_position_controller/pid/p: 10.0
+ * /infantry/Rev34_position_controller/type: velocity_controll...
+ * /infantry/Rev35_position_controller/joint: Rev35
+ * /infantry/Rev35_position_controller/pid/d: 0.4
+ * /infantry/Rev35_position_controller/pid/i: 1
+ * /infantry/Rev35_position_controller/pid/p: 0.001
+ * /infantry/Rev35_position_controller/type: effort_controller...
+ * /infantry/Rev36_position_controller/joint: Rev36
+ * /infantry/Rev36_position_controller/pid/d: 0.01
+ * /infantry/Rev36_position_controller/pid/i: 0.01
+ * /infantry/Rev36_position_controller/pid/p: 1.0
+ * /infantry/Rev36_position_controller/type: effort_controller...
+ * /infantry/Rev37_position_controller/joint: Rev37
+ * /infantry/Rev37_position_controller/pid/d: 0.01
+ * /infantry/Rev37_position_controller/pid/i: 0.01
+ * /infantry/Rev37_position_controller/pid/p: 1.0
+ * /infantry/Rev37_position_controller/type: effort_controller...
+ * /infantry/joint_state_controller/publish_rate: 100
+ * /infantry/joint_state_controller/type: joint_state_contr...
+ * /rosdistro: noetic
+ * /rosversion: 1.15.14
+
+NODES
+  /
+    robot_state_publisher (robot_state_publisher/robot_state_publisher)
+  /infantry/
+    controller_spawner (controller_manager/spawner)
+
+ROS_MASTER_URI=http://bssn-laptop:42457/
+
+WARNING: Package name "diff_H80_description" does not follow the naming conventions. It should start with a lower case letter and only contain lower case letters, digits, underscores, and dashes.
+process[infantry/controller_spawner-1]: started with pid [14657]
+process[robot_state_publisher-2]: started with pid [14658]
+[ WARN] [1676248814.699073497]: link 'laser_link' material 'black' undefined.
+[ WARN] [1676248814.699689819]: link 'laser_link' material 'black' undefined.
+[ WARN] [1676248814.699709864]: link 'imu_link' material 'blue' undefined.
+[ WARN] [1676248814.699714621]: link 'imu_link' material 'blue' undefined.
+[ WARN] [1676248814.699862408]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[INFO] [1676248814.959240, 0.000000]: Waiting for /clock to be available...
+[INFO] [1676248815.271912, 2.310000]: /clock is published. Proceeding to load the controller(s).
+[INFO] [1676248815.272821, 2.310000]: Controller Spawner: Waiting for service controller_manager/load_controller
+[INFO] [1676248815.274642, 2.311000]: Controller Spawner: Waiting for service controller_manager/switch_controller
+[INFO] [1676248815.276038, 2.312000]: Controller Spawner: Waiting for service controller_manager/unload_controller
+[INFO] [1676248815.277462, 2.313000]: Loading controller: Rev27_position_controller
+[INFO] [1676248815.336435, 2.351000]: Loading controller: Rev28_position_controller
+[INFO] [1676248815.344274, 2.356000]: Loading controller: Rev29_position_controller
+[INFO] [1676248815.362076, 2.367000]: Loading controller: Rev30_position_controller
+[INFO] [1676248815.368414, 2.370000]: Loading controller: Rev31_position_controller
+[INFO] [1676248815.385135, 2.381000]: Loading controller: Rev32_position_controller
+[INFO] [1676248815.390082, 2.384000]: Loading controller: Rev33_position_controller
+[INFO] [1676248815.406681, 2.394000]: Loading controller: Rev34_position_controller
+[INFO] [1676248815.411376, 2.397000]: Loading controller: Rev35_position_controller
+[INFO] [1676248815.426269, 2.406000]: Loading controller: Rev36_position_controller
+[INFO] [1676248815.441144, 2.415000]: Loading controller: Rev37_position_controller
+[INFO] [1676248815.457711, 2.425000]: Loading controller: joint_state_controller
+[INFO] [1676248815.466151, 2.430000]: Controller Spawner: Loaded controllers: Rev27_position_controller, Rev28_position_controller, Rev29_position_controller, Rev30_position_controller, Rev31_position_controller, Rev32_position_controller, Rev33_position_controller, Rev34_position_controller, Rev35_position_controller, Rev36_position_controller, Rev37_position_controller, joint_state_controller
+[INFO] [1676248815.469303, 2.432000]: Started controllers: Rev27_position_controller, Rev28_position_controller, Rev29_position_controller, Rev30_position_controller, Rev31_position_controller, Rev32_position_controller, Rev33_position_controller, Rev34_position_controller, Rev35_position_controller, Rev36_position_controller, Rev37_position_controller, joint_state_controller
+
+ -->
