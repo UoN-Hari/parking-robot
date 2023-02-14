@@ -4,6 +4,15 @@
 <xacro:include filename="$(find diff_H80_description)/urdf/materials.xacro" />
 <xacro:include filename="$(find diff_H80_description)/urdf/diff_H80.trans" />
 <xacro:include filename="$(find diff_H80_description)/urdf/diff_H80.gazebo" />
+
+
+
+
+
+
+
+
+
 <link name="base_link">
   <inertial>
     <origin xyz="-0.0007097470847777941 0.1606544159292186 -6.0780571919646865e-05" rpy="0 0 0"/>
