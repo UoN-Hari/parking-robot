@@ -1,0 +1,10 @@
+<launch>
+	<param name="ProjectName" value="plate_localization" />
+	<param name="CameraTopic" value="/camera/color/image_raw" />
+
+	<include file="$(find plate_localization)/launch/D455_848x480.launch" />
+
+	<node pkg="plate_localization" type="plate_localization_node" name="plate_localization_node" output="screen"/>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find plate_localization)/launch/plate_localization.rviz" />
+</launch>
