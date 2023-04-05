@@ -1,0 +1,4 @@
+ <launch>
+    <node name="mcu_node" pkg="mcu_serial" type="main.py" output="screen"/>
+    <!-- <include file="$(find imu_launch)/launch/imu_msg.launch" /> -->
+ </launch>
