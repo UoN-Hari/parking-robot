@@ -1,12 +1,12 @@
 <launch>
 
-	<!-- <param name="SubTopic0" value="/sub_topic0" /> -->
+	<param name="SubTopic0" value="/cmd_vel" />
 	<param name="PubTopic0" value="/motor_cmd" />
 	<!-- <param name="SubTopic1" value="/sub_topic1" /> -->
 	<!-- <param name="PubTopic1" value="/pub_topic1" /> -->
 
 	<param name="LROffset" value="1" />
-	<param name="MotorOffset" value="1" />
+	<param name="MotorOffset" value="50" />
 	<node pkg="movement_calculation" type="movement_calculation_node" name="movement_calculation_node" output="screen"/>
 
 </launch>
