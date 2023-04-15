@@ -1,5 +1,9 @@
 #include "subpuber.h"
 
+// #define SQUARE
+// #define MOTOR_OFFSET
+#define ANGULAR_OFFSET
+
 void SubPuber::MotionControlCallBack()
 {
   double lastLength, lastWidth;
@@ -14,7 +18,8 @@ void SubPuber::MotionControlCallBack()
   geometry_msgs::Twist angularCmdVel;
   angularCmdVel.angular.z = angularSpd;
 
-  /*
+#ifdef SQUARE
+  // Square
   // while(1) {
   // for(int i = 0; i <= 3; i++) {
     startTime =ros::Time::now().toSec();
@@ -31,29 +36,31 @@ void SubPuber::MotionControlCallBack()
     // angularTimeOffset = ros::Time::now().toSec() - startTime + angularTimeOffset - angularTime;
     // ROS_INFO("AngularTimeOffset: %lf", angularTimeOffset);
   // }
-  */
+#endif
 
-
-    startTime =ros::Time::now().toSec();
-
-    // while((ros::Time::now().toSec() - startTime - lengthTimeOffset) < lengthTime) {
-      // topicPuber0.publish(linearCmdVel);
-    // }
-
-    ROS_INFO("Cmdvel: %lf", linearCmdVel.linear.x);
-    while(ros::Time::now().toSec() - startTime < 6) {
-      topicPuber0.publish(linearCmdVel); 
-    }
-    linearCmdVel.linear.x = 0;
+#ifdef MOTOR_OFFSET 
+  // MotorOffset identification
+  startTime =ros::Time::now().toSec();
+  while(ros::Time::now().toSec() - startTime < lengthTime) {
     topicPuber0.publish(linearCmdVel);
-    
+  }
+  linearCmdVel.linear.x = 0;
+  topicPuber0.publish(linearCmdVel);
+  lengthTimeOffset = ros::Time::now().toSec() - startTime - lengthTimeOffset - lengthTime;
+  ROS_INFO("LengthTimeOffset: %lf", lengthTimeOffset);
+#endif
 
-    lengthTimeOffset = ros::Time::now().toSec() - startTime - lengthTimeOffset - lengthTime;
-    ROS_INFO("LengthTimeOffset: %lf", lengthTimeOffset);
+#ifdef ANGULAR_OFFSET
+  // AngularOffset identification
+  startTime =ros::Time::now().toSec();
+  // Turn for 1 cycle
+  while(ros::Time::now().toSec() - startTime < angularTime * 4) {
+    topicPuber0.publish(angularCmdVel);
+  }
+  angularCmdVel.angular.z = 0;
+  topicPuber0.publish(angularCmdVel);
+  angularTimeOffset = ros::Time::now().toSec() - startTime + angularTimeOffset - angularTime;
+  ROS_INFO("AngularTimeOffset: %lf", angularTimeOffset);
+#endif
 
-    // startTime =ros::Time::now().toSec();
-    // topicPuber0.publish(angularCmdVel);
-    // while((ros::Time::now().toSec() - startTime + angularTimeOffset) < angularTime) {}
-    // angularTimeOffset = ros::Time::now().toSec() - startTime + angularTimeOffset - angularTime;
-    // ROS_INFO("AngularTimeOffset: %lf", angularTimeOffset);
 }
