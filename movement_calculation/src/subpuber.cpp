@@ -15,7 +15,7 @@ void SubPuber::MovementCalculationCallback(const geometry_msgs::Twist &cmdVel)
   motorCmdVel.angular1 = angularL;
   motorCmdVel.angular2 = angularR;
 
-  // Right wheel offset ratio refers to Left wheel
+  // Right wheel offset ratio refers to Left wheel. Approx. = 1
   motorCmdVel.angular2 *= lrOffset;
 
   // ROS_INFO("Angular1: %d", motorCmdVel.angular1);
@@ -23,6 +23,9 @@ void SubPuber::MovementCalculationCallback(const geometry_msgs::Twist &cmdVel)
 
   motorCmdVel.dir1 = motorCmdVel.angular1 >= 0 ? 0 : 1;
   motorCmdVel.dir2 = motorCmdVel.angular2 >= 0 ? 0 : 1;
+  motorCmdVel.angular1 = abs(motorCmdVel.angular1);
+  motorCmdVel.angular2 = abs(motorCmdVel.angular2);
+  // motorCmdVel.angular2 = 0;
 
   topicPuber0.publish(motorCmdVel);
 }

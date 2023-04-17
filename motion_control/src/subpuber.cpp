@@ -1,8 +1,8 @@
 #include "subpuber.h"
 
-// #define SQUARE
+#define SQUARE
 // #define MOTOR_OFFSET
-#define ANGULAR_OFFSET
+// #define ANGULAR_OFFSET
 
 void SubPuber::MotionControlCallBack()
 {
@@ -25,11 +25,21 @@ void SubPuber::MotionControlCallBack()
     startTime =ros::Time::now().toSec();
 
     topicPuber0.publish(linearCmdVel);
-    while((ros::Time::now().toSec() - startTime - lengthTimeOffset) < lengthTime) {}
-    // ROS_INFO("Cmdvel: %lf", linearCmdVel.linear.x);
+    while((ros::Time::now().toSec() - startTime - lengthTimeOffset) < lengthTime) {
+      topicPuber0.publish(linearCmdVel);
+    }
+    angularCmdVel.linear.x = 0;
+    topicPuber0.publish(linearCmdVel);
     lengthTimeOffset = ros::Time::now().toSec() - startTime - lengthTimeOffset - lengthTime;
-    ROS_INFO("LengthTimeOffset: %lf", lengthTimeOffset);
+    // ROS_INFO("LengthTimeOffset: %lf", lengthTimeOffset);
 
+    startTime =ros::Time::now().toSec();
+    while(ros::Time::now().toSec() - startTime < angularTime) {
+      topicPuber0.publish(angularCmdVel);
+    }
+    angularCmdVel.angular.z = 0;
+    topicPuber0.publish(angularCmdVel);
+    angularTimeOffset = ros::Time::now().toSec() - startTime + angularTimeOffset - angularTime;
     // startTime =ros::Time::now().toSec();
     // topicPuber0.publish(angularCmdVel);
     // while((ros::Time::now().toSec() - startTime + angularTimeOffset) < angularTime) {}

@@ -7,7 +7,7 @@
 
 	<param name="LROffset" value="1" />
 	<param name="MotorOffset" value="210" />
-	<param name="AngularOffset" value="0.25" />
+	<param name="AngularOffset" value="0.28" />
 	<node pkg="movement_calculation" type="movement_calculation_node" name="movement_calculation_node" output="screen"/>
 
 </launch>
