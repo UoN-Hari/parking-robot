@@ -52,7 +52,6 @@ if __name__ == '__main__':
             # serial.TransmitRosMsg(sub.right_twist_msg)
             # serial.TransmitRosMsg(sub.gimbal_twist_msg)
             serial.TransmitRosMsg(sub.motor_msg)
-
             # serial.receiveMsg()
             
             # pub.publish(serial.rc_msg)
