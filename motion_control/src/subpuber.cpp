@@ -1,7 +1,7 @@
 #include "subpuber.h"
 
-#define SQUARE
-// #define MOTOR_OFFSET
+// #define SQUARE
+#define MOTOR_OFFSET
 // #define ANGULAR_OFFSET
 
 void SubPuber::MotionControlCallBack()
@@ -17,6 +17,7 @@ void SubPuber::MotionControlCallBack()
   linearCmdVel.linear.x = linearSpd;
   geometry_msgs::Twist angularCmdVel;
   angularCmdVel.angular.z = angularSpd;
+  geometry_msgs::Pose2D curPose;
 
 #ifdef SQUARE
   // Square
@@ -52,7 +53,10 @@ void SubPuber::MotionControlCallBack()
   // MotorOffset identification
   startTime =ros::Time::now().toSec();
   while(ros::Time::now().toSec() - startTime < lengthTime) {
+    // std::cout<<"hahahah"<<std::endl;
     topicPuber0.publish(linearCmdVel);
+    curPose.x = (ros::Time::now().toSec() - startTime) * linearCmdVel.linear.x;
+    topicPuber1.publish(curPose);
   }
   linearCmdVel.linear.x = 0;
   topicPuber0.publish(linearCmdVel);

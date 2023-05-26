@@ -2,9 +2,10 @@
 
 	<!-- <param name="SubTopic0" value="/sub_topic0" /> -->
 	<param name="PubTopic0" value="/cmd_vel" />
+	<param name="PubTopic1" value="/cur_pos" />
 	<param name="LinearSpd" value="0.2" />
 	<param name="AngularSpd" value="0.35" />
-	<param name="RectLength" value="0.2" />
+	<param name="RectLength" value="2" />
 	<param name="RectWidth" value="1" />
 
 	<node pkg="motion_control" type="motion_control_node" name="motion_control_node" output="screen"/>

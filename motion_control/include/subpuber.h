@@ -9,6 +9,7 @@
 #include <std_msgs/String.h>
 #include <std_msgs/Float32.h>
 #include <geometry_msgs/Twist.h>
+#include <geometry_msgs/Pose2D.h>
 #include <cv_bridge/cv_bridge.h>
 #include <opencv2/opencv.hpp>
 #include <math.h>
@@ -20,11 +21,12 @@ private:
 
   ros::NodeHandle nodeHandle;
 
-  // ros::Subscriber topicSuber0;
   ros::Publisher topicPuber0;
+  ros::Publisher topicPuber1;
 
-  // std::string subTopic0;
+  // Name of each topic, modify in launch file;
   std::string pubTopic0;
+  std::string pubTopic1;
 
   double linearSpd;
   double angularSpd;
@@ -37,6 +39,7 @@ public:
   SubPuber(){
     // ros::param::get("SubTopic0", subTopic0);
     ros::param::get("PubTopic0", pubTopic0);
+    ros::param::get("PubTopic1", pubTopic1);
     ros::param::get("LinearSpd", linearSpd);
     ros::param::get("AngularSpd", angularSpd);
 
@@ -44,7 +47,12 @@ public:
     ros::param::get("RectWidth", rectWidth);
 
     // topicSuber0 = nodeHandle.subscribe(subTopic0, 1, &SubPuber::MovementCalculationCallback, this);
+
+    // CmdVel publisher
     topicPuber0 = nodeHandle.advertise<geometry_msgs::Twist>(pubTopic0, 1);
+
+    // Current position publisher
+    topicPuber1 = nodeHandle.advertise<geometry_msgs::Pose2D>(pubTopic1, 1);
     ROS_INFO("CONSTRUCTED");
   }
 
